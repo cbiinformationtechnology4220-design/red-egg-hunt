@@ -13,6 +13,11 @@ const BRAND_ASSETS = Object.freeze({
   locationUrl: 'https://www.google.com/maps/search/?api=1&query=Red+Egg+Deli+Club+Balai+Isabel+Talisay+Batangas',
 });
 
+const DELI_HOURS = Object.freeze({
+  weekday: 'Sun–Thu, 7AM to 5PM',
+  weekend: 'Fri & Sat, 7AM to 7PM',
+});
+
 const PUBLIC_COPY = Object.freeze({
   heroKicker: 'Scan. I-type. Malaman agad.',
   heroTitle: 'Hanapin ang Red Egg.',
@@ -142,7 +147,6 @@ function BokyaPanel() {
         <strong>Sunod na gawin</strong>
         <p>Scan ulit ng ibang egg. Kapag winning egg iyon, lalabas ang form para ma-record ang entry mo.</p>
       </div>
-      <a className="button button-secondary" href="/">Balik sa hunt page</a>
     </section>
   );
 }
@@ -159,20 +163,24 @@ function DeliDetails() {
             <span className="detail-index" aria-hidden="true">01</span>
             <span><strong>Punta rito</strong><small>{BRAND_ASSETS.location}</small></span>
           </a>
-          <a className="detail-link" href="tel:09952863665">
+          <div className="detail-link detail-link-static">
             <span className="detail-index" aria-hidden="true">02</span>
+            <span><strong>Bukas kami</strong><small>{DELI_HOURS.weekday}<br />{DELI_HOURS.weekend}</small></span>
+          </div>
+          <a className="detail-link" href="tel:09952863665">
+            <span className="detail-index" aria-hidden="true">03</span>
             <span><strong>May tanong?</strong><small>Tawag sa 0995 286 3665</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.instagram} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">03</span>
+            <span className="detail-index" aria-hidden="true">04</span>
             <span><strong>Instagram namin</strong><small>@redegg.deli</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.facebook} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">04</span>
+            <span className="detail-index" aria-hidden="true">05</span>
             <span><strong>Facebook namin</strong><small>Red Egg Deli</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.officialPage} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">05</span>
+            <span className="detail-index" aria-hidden="true">06</span>
             <span><strong>Alamin pa</strong><small>Red Egg Deli at Club Balai Isabel</small></span>
           </a>
         </div>
