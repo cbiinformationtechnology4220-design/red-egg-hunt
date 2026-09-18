@@ -19,15 +19,13 @@ const DELI_HOURS = Object.freeze({
 });
 
 const CAMPAIGN_INTRO = Object.freeze({
-  heroKicker: 'Scan at Manalo!',
-  heroTitle: 'I-scan ang QR code.',
-  heroLede: 'I-type ang 8-digit code na makikita sa tabi nito para opisyal na makapasok ang entry mo!',
-  heroPrize: 'Ang Premyo: May tsansa kang manalo ng hanggang ₱2,500 Cash Voucher!',
+  heroKicker: 'SCAN AT MANALO!',
+  heroTitle: 'Scan ang QR!',
+  heroPrize: 'Chance manalo ng hanggang ₱2,500 cash voucher!',
 });
 
 const PUBLIC_COPY = Object.freeze({
   ...CAMPAIGN_INTRO,
-  heroNote: 'QR scan lang ito, hindi pa ubos ang card. Magiging consumed lang pagkatapos ng matagumpay na submission.',
   instructionsTitle: 'Itago muna ang printed code bago mag-submit.',
   instructionsBody: 'Hanap ng Red Egg Hunt card, i-scan ang shared QR, at i-type ang walong-digit code na naka-print sa tabi nito.',
   screenshotInstructions: 'I-screenshot ang acknowledgement message na ito para may reference ka. Huwag i-post ang mobile number o ibang private information publicly.',
@@ -167,6 +165,8 @@ function DeliIcon({ name }) {
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M20 10.2c0 5.3-8 11-8 11s-8-5.7-8-11a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.6" /></svg>;
     case 'hours':
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2" /></svg>;
+    case 'delivery':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M3.5 6.5h10v9h-10zM13.5 9h3l3 3v3.5h-6z" /><circle cx="7" cy="17.5" r="1.8" /><circle cx="17" cy="17.5" r="1.8" /></svg>;
     case 'phone':
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M6.7 3.8 9 3.1c.6-.2 1.2.1 1.5.7l1.1 2.7c.2.5.1 1-.3 1.4L9.8 9.5a14.7 14.7 0 0 0 4.7 4.7l1.6-1.5c.4-.4.9-.5 1.4-.3l2.7 1.1c.6.3.9.9.7 1.5l-.7 2.3c-.2.7-.9 1.2-1.6 1.2C10.3 18.5 5.5 13.7 5.5 5.4c0-.7.5-1.4 1.2-1.6Z" /></svg>;
     case 'instagram':
@@ -177,6 +177,8 @@ function DeliIcon({ name }) {
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><circle cx="12" cy="12" r="8.5" /><path d="M12 10.7v5.1M12 7.7h.01" /></svg>;
     case 'menu':
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M6 3.5h9l3 3v14H6z" /><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h4" /></svg>;
+    case 'loyalty':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><rect x="3.5" y="5" width="17" height="14" rx="2" /><path d="M6.5 9h5M6.5 12h3" /><path d="m16.8 9.1.6 1.3 1.4.2-1 1 .2 1.4-1.2-.7-1.2.7.2-1.4-1-1 1.4-.2.6-1.3Z" /></svg>;
     case 'arrow':
       return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M5 12h13M13 7l5 5-5 5" /></svg>;
     default:
@@ -191,6 +193,10 @@ function DeliDetails() {
         <span className="eyebrow">Dito ang saya</span>
         <h2 id="deli-title">Kain tayo, kabayan!</h2>
         <p>Mas masaya ang hunt kapag may almusal, merienda, at kape. Visit Red Egg Deli sa Club Balai Isabel.</p>
+        <div className="delivery-callout">
+          <span className="detail-icon-wrap"><DeliIcon name="delivery" /></span>
+          <span><strong>Open for delivery</strong><small>Free delivery inside Club Balai Isabel.</small></span>
+        </div>
         <div className="deli-links">
           <a className="detail-link" href={BRAND_ASSETS.locationUrl} target="_blank" rel="noreferrer">
             <span className="detail-icon-wrap"><DeliIcon name="location" /></span>
@@ -216,6 +222,11 @@ function DeliDetails() {
             <span className="detail-icon-wrap"><DeliIcon name="info" /></span>
             <span><strong>Alamin pa</strong><small>Red Egg Deli at Club Balai Isabel</small></span>
           </a>
+        </div>
+        <div className="loyalty-card" role="note">
+          <span className="loyalty-icon"><DeliIcon name="loyalty" /></span>
+          <span className="loyalty-copy"><strong>Loyalty Card</strong><small>Claim at the cafe.</small></span>
+          <span className="loyalty-arrow"><DeliIcon name="arrow" /></span>
         </div>
       </div>
       <a className="menu-card" href={BRAND_ASSETS.menu} target="_blank" rel="noreferrer" aria-label="Open the 2026 Red Egg Deli menu PDF">
@@ -341,9 +352,9 @@ function PublicApp() {
           <div className="hero-copy">
             <span className="eyebrow">{pageCopy.heroKicker}</span>
             <h1 id="page-title">{pageCopy.heroTitle}</h1>
-            <p className="hero-lede">{pageCopy.heroLede}</p>
+            {pageCopy.heroLede && <p className="hero-lede">{pageCopy.heroLede}</p>}
             <p className="hero-prize">{pageCopy.heroPrize}</p>
-            <p className="hero-note">{pageCopy.heroNote}</p>
+            {pageCopy.heroNote && <p className="hero-note">{pageCopy.heroNote}</p>}
             {!bokyaMode && <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>}
           </div>
           <div className="hero-art" aria-hidden="true">
@@ -390,6 +401,7 @@ function PublicApp() {
                     <Field id="field-mobile" label="Mobile number" hint="Private ito. Halimbawa: 0917 123 4567." error={errors.mobile}><input id="field-mobile" name="mobile" type="tel" inputMode="tel" autoComplete="tel" maxLength="20" aria-invalid={errors.mobile ? 'true' : 'false'} aria-describedby={`field-mobile-hint${errors.mobile ? ' field-mobile-error' : ''}`} value={form.mobile} onChange={(event) => updateField('mobile', event.target.value)} /></Field>
                     <Field id="field-printedCode" label="Walong-digit na printed code" hint="I-type ang number na naka-print sa tabi ng QR." error={errors.printedCode}><input id="field-printedCode" name="printedCode" type="text" inputMode="numeric" autoComplete="off" pattern="[0-9]{8}" maxLength="8" aria-invalid={errors.printedCode ? 'true' : 'false'} aria-describedby={`field-printedCode-hint${errors.printedCode ? ' field-printedCode-error' : ''}`} value={form.printedCode} onChange={(event) => updateField('printedCode', event.target.value)} /></Field>
                     <p className="privacy-copy">Private lang ang pangalan at mobile number mo para ma-record ang entry at ma-contact ang verified winners. Huwag i-post publicly. Para sa privacy questions, tawag sa {campaign?.supportContact || '0995 286 3665'}.</p>
+                    <p className="privacy-notice"><strong>Data Privacy Act of 2012 (RA 10173):</strong> Gagamitin ang details mo para sa Red Egg Hunt entry at winner contact lang. <a href="https://privacy.gov.ph/data-privacy-act/" target="_blank" rel="noreferrer">Alamin ang batas</a>.</p>
                     <button className="button button-primary button-wide" type="submit" disabled={busy || campaign?.state !== 'live'}>{busy ? 'Sine-save ang entry...' : campaign?.state === 'live' ? 'I-submit ang entry' : 'Hindi pa bukas ang form'}</button>
                   </form>
                 </section>
