@@ -1,0 +1,30 @@
+{
+  "name": "@balai-assist/red-egg-hunt",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone Red Egg Hunt printed-code promotion form and staff claim tracker.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4173",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:backend": "vitest run tests/simplified-database-contract.test.js tests/simplified/google-sheets-repository.test.js",
+    "lint": "node scripts/lint.mjs",
+    "typecheck": "node scripts/typecheck.mjs",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.0",
+    "vite": "8.3.0",
+    "vitest": "4.1.11"
+  }
+}
