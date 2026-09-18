@@ -11,6 +11,9 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain('label="Pangalan"');
     expect(app).toContain('label="Mobile number"');
     expect(app).toContain('Walong-digit na printed code');
+    expect(app).toContain("pathname === '/bokya'");
+    expect(app).toContain('Bokya muna!');
+    expect(app).toContain('Walang form at walang kailangang ilagay na pangalan o mobile number');
     expect(staff).toContain('htmlFor="staff-printed-code"');
     expect(css).toContain(':focus-visible');
     expect(css).toContain('prefers-reduced-motion');

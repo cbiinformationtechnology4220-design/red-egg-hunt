@@ -23,9 +23,21 @@ const PUBLIC_COPY = Object.freeze({
   screenshotInstructions: 'I-screenshot ang acknowledgement message na ito para may reference ka. Huwag i-post ang mobile number o ibang private information publicly.',
 });
 
+const BOKYA_COPY = Object.freeze({
+  heroKicker: 'False alarm muna.',
+  heroTitle: 'Bokya muna!',
+  heroLede: 'Hindi winning egg ang na-scan mo. Huwag susuko, kabayan—hanap pa ng ibang Red Egg.',
+  heroNote: 'Walang form at walang kailangang ilagay na pangalan o mobile number sa card na ito.',
+});
+
 function route() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
   return pathname === '/staff' || pathname.startsWith('/staff/') ? 'staff' : 'public';
+}
+
+function publicMode() {
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+  return pathname === '/bokya' || pathname.startsWith('/bokya/') ? 'bokya' : 'winning';
 }
 
 function makeRequestId() {
@@ -119,6 +131,22 @@ function Acknowledgement({ result, screenshotInstructions, onAnother }) {
   );
 }
 
+function BokyaPanel() {
+  return (
+    <section className="bokya-panel panel" aria-labelledby="bokya-title">
+      <div className="bokya-wordmark" aria-hidden="true">BOKYA</div>
+      <span className="eyebrow">False alarm muna</span>
+      <h2 id="bokya-title">Huwag susuko, kabayan.</h2>
+      <p className="bokya-lede">Walang winning code sa egg na ito. Hanap pa ng ibang Red Egg para makasali.</p>
+      <div className="bokya-next">
+        <strong>Sunod na gawin</strong>
+        <p>Scan ulit ng ibang egg. Kapag winning egg iyon, lalabas ang form para ma-record ang entry mo.</p>
+      </div>
+      <a className="button button-secondary" href="/">Balik sa hunt page</a>
+    </section>
+  );
+}
+
 function DeliDetails() {
   return (
     <section className="deli-section" aria-labelledby="deli-title">
@@ -160,6 +188,7 @@ function DeliDetails() {
 }
 
 function PublicApp() {
+  const bokyaMode = publicMode() === 'bokya';
   const [campaign, setCampaign] = useState(null);
   const [loadError, setLoadError] = useState(null);
   const [form, setForm] = useState({ name: '', mobile: '', printedCode: '' });
@@ -207,7 +236,7 @@ function PublicApp() {
     }
   };
 
-  useEffect(() => { loadCampaign(); }, []);
+  useEffect(() => { if (!bokyaMode) loadCampaign(); }, [bokyaMode]);
 
   const updateField = (name, value) => {
     setForm((current) => ({ ...current, [name]: name === 'printedCode' ? value.replace(/\D/g, '').slice(0, 8) : value }));
@@ -259,6 +288,8 @@ function PublicApp() {
 
   if (route() === 'staff') return <StaffApp />;
 
+  const pageCopy = bokyaMode ? BOKYA_COPY : PUBLIC_COPY;
+
   return (
     <div className="app-shell">
       <header className="site-header">
@@ -267,11 +298,11 @@ function PublicApp() {
       <main id="main-content" className="content-width public-main">
         <section className="hero" aria-labelledby="page-title">
           <div className="hero-copy">
-            <span className="eyebrow">{PUBLIC_COPY.heroKicker}</span>
-            <h1 id="page-title">{PUBLIC_COPY.heroTitle}</h1>
-            <p className="hero-lede">{PUBLIC_COPY.heroLede}</p>
-            <p className="hero-note">{PUBLIC_COPY.heroNote}</p>
-            <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>
+            <span className="eyebrow">{pageCopy.heroKicker}</span>
+            <h1 id="page-title">{pageCopy.heroTitle}</h1>
+            <p className="hero-lede">{pageCopy.heroLede}</p>
+            <p className="hero-note">{pageCopy.heroNote}</p>
+            {!bokyaMode && <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>}
           </div>
           <div className="hero-art" aria-hidden="true">
             <span className="hero-orbit hero-orbit-one" />
@@ -282,44 +313,48 @@ function PublicApp() {
           </div>
         </section>
 
-        {loadError && <div className="notice notice-error" role="alert"><strong>Hindi ma-load ang status ng hunt.</strong><span>{loadError}</span><button className="text-button" type="button" onClick={loadCampaign}>Try ulit</button></div>}
-        {campaign && (
+        {bokyaMode ? <BokyaPanel /> : (
           <>
-            <section className={`campaign-status status-${campaign.state}`} aria-labelledby="status-title">
-              <div><span className="eyebrow">Status ng hunt</span><h2 id="status-title">{stateLabel(campaign.state)}</h2></div>
-              <div className="server-time"><span>Server time</span><strong>{formatServerTime(campaign.serverNow, campaign.timezone)}</strong></div>
-              <p>{campaign.state === 'locked' ? `Bukas ang hunt mula ${campaignWindow(campaign)}.` : campaign.state === 'ended' ? 'Closed na ang bagong submissions.' : `Open ang hunt mula ${campaignWindow(campaign)}.`}</p>
-            </section>
-            <CampaignCounters campaign={campaign} />
+            {loadError && <div className="notice notice-error" role="alert"><strong>Hindi ma-load ang status ng hunt.</strong><span>{loadError}</span><button className="text-button" type="button" onClick={loadCampaign}>Try ulit</button></div>}
+            {campaign && (
+              <>
+                <section className={`campaign-status status-${campaign.state}`} aria-labelledby="status-title">
+                  <div><span className="eyebrow">Status ng hunt</span><h2 id="status-title">{stateLabel(campaign.state)}</h2></div>
+                  <div className="server-time"><span>Server time</span><strong>{formatServerTime(campaign.serverNow, campaign.timezone)}</strong></div>
+                  <p>{campaign.state === 'locked' ? `Bukas ang hunt mula ${campaignWindow(campaign)}.` : campaign.state === 'ended' ? 'Closed na ang bagong submissions.' : `Open ang hunt mula ${campaignWindow(campaign)}.`}</p>
+                </section>
+                <CampaignCounters campaign={campaign} />
+              </>
+            )}
+
+            <div className="public-grid">
+              <section className="instructions panel" aria-labelledby="instructions-title">
+                <span className="eyebrow">Paano sumali</span>
+                <h2 id="instructions-title">{PUBLIC_COPY.instructionsTitle}</h2>
+                <p>{PUBLIC_COPY.instructionsBody}</p>
+                <ol className="steps"><li><span>1</span><div><strong>I-scan ang shared QR</strong><small>Dadalhin ka nito sa page na ito.</small></div></li><li><span>2</span><div><strong>Ilagay ang details mo</strong><small>Pangalan, mobile number, at printed code.</small></div></li><li><span>3</span><div><strong>I-screenshot ang resulta</strong><small>Itago ang acknowledgement para may reference ka.</small></div></li></ol>
+              </section>
+
+              {result ? <Acknowledgement result={result} screenshotInstructions={PUBLIC_COPY.screenshotInstructions} onAnother={resetForm} /> : (
+                <section id="participant-form" className="form-panel panel" aria-labelledby="form-title">
+                  <span className="eyebrow">Entry form</span>
+                  <h2 id="form-title">I-record ang card mo.</h2>
+                  <p className="panel-lede">I-type ang walong-digit number sa tabi ng QR. Walang spaces.</p>
+                  <p className="prize-note"><strong>Premyo:</strong> {campaign?.prizeDescription || 'PHP50 cash voucher'}</p>
+                  {visibleErrors.length > 0 && <div className="error-summary" tabIndex="-1" ref={summaryRef} role="alert"><strong>Paki-check ito:</strong><ul>{visibleErrors.map(([key, message]) => <li key={key}><a href={`#field-${key}`}>{message}</a></li>)}</ul></div>}
+                  {notice && <div className={`notice notice-${notice.tone}`} role="alert">{notice.text}</div>}
+                  <form onSubmit={submit} noValidate>
+                    <Field id="field-name" label="Pangalan" hint="Gamitin ang pangalang gusto mong naka-associate sa entry na ito." error={errors.name}><input id="field-name" name="name" type="text" autoComplete="name" maxLength="120" aria-invalid={errors.name ? 'true' : 'false'} aria-describedby={`field-name-hint${errors.name ? ' field-name-error' : ''}`} value={form.name} onChange={(event) => updateField('name', event.target.value)} /></Field>
+                    <Field id="field-mobile" label="Mobile number" hint="Private ito. Halimbawa: 0917 123 4567." error={errors.mobile}><input id="field-mobile" name="mobile" type="tel" inputMode="tel" autoComplete="tel" maxLength="20" aria-invalid={errors.mobile ? 'true' : 'false'} aria-describedby={`field-mobile-hint${errors.mobile ? ' field-mobile-error' : ''}`} value={form.mobile} onChange={(event) => updateField('mobile', event.target.value)} /></Field>
+                    <Field id="field-printedCode" label="Walong-digit na printed code" hint="I-type ang number na naka-print sa tabi ng QR." error={errors.printedCode}><input id="field-printedCode" name="printedCode" type="text" inputMode="numeric" autoComplete="off" pattern="[0-9]{8}" maxLength="8" aria-invalid={errors.printedCode ? 'true' : 'false'} aria-describedby={`field-printedCode-hint${errors.printedCode ? ' field-printedCode-error' : ''}`} value={form.printedCode} onChange={(event) => updateField('printedCode', event.target.value)} /></Field>
+                    <p className="privacy-copy">Private lang ang pangalan at mobile number mo para ma-record ang entry at ma-contact ang verified winners. Huwag i-post publicly. Para sa privacy questions, tawag sa {campaign?.supportContact || '0995 286 3665'}.</p>
+                    <button className="button button-primary button-wide" type="submit" disabled={busy || campaign?.state !== 'live'}>{busy ? 'Sine-save ang entry...' : campaign?.state === 'live' ? 'I-submit ang entry' : 'Hindi pa bukas ang form'}</button>
+                  </form>
+                </section>
+              )}
+            </div>
           </>
         )}
-
-        <div className="public-grid">
-          <section className="instructions panel" aria-labelledby="instructions-title">
-            <span className="eyebrow">Paano sumali</span>
-            <h2 id="instructions-title">{PUBLIC_COPY.instructionsTitle}</h2>
-            <p>{PUBLIC_COPY.instructionsBody}</p>
-            <ol className="steps"><li><span>1</span><div><strong>I-scan ang shared QR</strong><small>Dadalhin ka nito sa page na ito.</small></div></li><li><span>2</span><div><strong>Ilagay ang details mo</strong><small>Pangalan, mobile number, at printed code.</small></div></li><li><span>3</span><div><strong>I-screenshot ang resulta</strong><small>Itago ang acknowledgement para may reference ka.</small></div></li></ol>
-          </section>
-
-          {result ? <Acknowledgement result={result} screenshotInstructions={PUBLIC_COPY.screenshotInstructions} onAnother={resetForm} /> : (
-            <section id="participant-form" className="form-panel panel" aria-labelledby="form-title">
-              <span className="eyebrow">Entry form</span>
-              <h2 id="form-title">I-record ang card mo.</h2>
-              <p className="panel-lede">I-type ang walong-digit number sa tabi ng QR. Walang spaces.</p>
-              <p className="prize-note"><strong>Premyo:</strong> {campaign?.prizeDescription || 'PHP50 cash voucher'}</p>
-              {visibleErrors.length > 0 && <div className="error-summary" tabIndex="-1" ref={summaryRef} role="alert"><strong>Paki-check ito:</strong><ul>{visibleErrors.map(([key, message]) => <li key={key}><a href={`#field-${key}`}>{message}</a></li>)}</ul></div>}
-              {notice && <div className={`notice notice-${notice.tone}`} role="alert">{notice.text}</div>}
-              <form onSubmit={submit} noValidate>
-                <Field id="field-name" label="Pangalan" hint="Gamitin ang pangalang gusto mong naka-associate sa entry na ito." error={errors.name}><input id="field-name" name="name" type="text" autoComplete="name" maxLength="120" aria-invalid={errors.name ? 'true' : 'false'} aria-describedby={`field-name-hint${errors.name ? ' field-name-error' : ''}`} value={form.name} onChange={(event) => updateField('name', event.target.value)} /></Field>
-                <Field id="field-mobile" label="Mobile number" hint="Private ito. Halimbawa: 0917 123 4567." error={errors.mobile}><input id="field-mobile" name="mobile" type="tel" inputMode="tel" autoComplete="tel" maxLength="20" aria-invalid={errors.mobile ? 'true' : 'false'} aria-describedby={`field-mobile-hint${errors.mobile ? ' field-mobile-error' : ''}`} value={form.mobile} onChange={(event) => updateField('mobile', event.target.value)} /></Field>
-                <Field id="field-printedCode" label="Walong-digit na printed code" hint="I-type ang number na naka-print sa tabi ng QR." error={errors.printedCode}><input id="field-printedCode" name="printedCode" type="text" inputMode="numeric" autoComplete="off" pattern="[0-9]{8}" maxLength="8" aria-invalid={errors.printedCode ? 'true' : 'false'} aria-describedby={`field-printedCode-hint${errors.printedCode ? ' field-printedCode-error' : ''}`} value={form.printedCode} onChange={(event) => updateField('printedCode', event.target.value)} /></Field>
-                <p className="privacy-copy">Private lang ang pangalan at mobile number mo para ma-record ang entry at ma-contact ang verified winners. Huwag i-post publicly. Para sa privacy questions, tawag sa {campaign?.supportContact || '0995 286 3665'}.</p>
-                <button className="button button-primary button-wide" type="submit" disabled={busy || campaign?.state !== 'live'}>{busy ? 'Sine-save ang entry...' : campaign?.state === 'live' ? 'I-submit ang entry' : 'Hindi pa bukas ang form'}</button>
-              </form>
-            </section>
-          )}
-        </div>
         <DeliDetails />
       </main>
       <footer className="site-footer"><div className="content-width footer-inner"><div><Brand compact /><p>May tanong? Tawag sa {campaign?.supportContact || '0995 286 3665'}.</p></div><p className="footer-note">Itago ang acknowledgement mo at huwag i-post ang pangalan o mobile number publicly.</p></div></footer>
