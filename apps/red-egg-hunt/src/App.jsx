@@ -154,6 +154,36 @@ function BokyaPanel() {
   );
 }
 
+function DeliIcon({ name }) {
+  const iconProps = {
+    viewBox: '0 0 24 24',
+    className: 'detail-icon',
+    'aria-hidden': 'true',
+    focusable: 'false',
+  };
+
+  switch (name) {
+    case 'location':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M20 10.2c0 5.3-8 11-8 11s-8-5.7-8-11a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.6" /></svg>;
+    case 'hours':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2" /></svg>;
+    case 'phone':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M6.7 3.8 9 3.1c.6-.2 1.2.1 1.5.7l1.1 2.7c.2.5.1 1-.3 1.4L9.8 9.5a14.7 14.7 0 0 0 4.7 4.7l1.6-1.5c.4-.4.9-.5 1.4-.3l2.7 1.1c.6.3.9.9.7 1.5l-.7 2.3c-.2.7-.9 1.2-1.6 1.2C10.3 18.5 5.5 13.7 5.5 5.4c0-.7.5-1.4 1.2-1.6Z" /></svg>;
+    case 'instagram':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" /><circle cx="12" cy="12" r="4" /><circle cx="17.6" cy="6.5" r=".8" fill="currentColor" stroke="none" /></svg>;
+    case 'facebook':
+      return <svg {...iconProps} viewBox="0 0 24 24"><path fill="currentColor" d="M13.7 21v-7h2.4l.4-2.8h-2.8V9.4c0-.8.2-1.4 1.5-1.4h1.6V5.5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v1.5H7.3V14h2.8v7h3.6Z" /></svg>;
+    case 'info':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><circle cx="12" cy="12" r="8.5" /><path d="M12 10.7v5.1M12 7.7h.01" /></svg>;
+    case 'menu':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M6 3.5h9l3 3v14H6z" /><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h4" /></svg>;
+    case 'arrow':
+      return <svg {...iconProps} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M5 12h13M13 7l5 5-5 5" /></svg>;
+    default:
+      return null;
+  }
+}
+
 function DeliDetails() {
   return (
     <section className="deli-section" aria-labelledby="deli-title">
@@ -163,36 +193,36 @@ function DeliDetails() {
         <p>Mas masaya ang hunt kapag may almusal, merienda, at kape. Visit Red Egg Deli sa Club Balai Isabel.</p>
         <div className="deli-links">
           <a className="detail-link" href={BRAND_ASSETS.locationUrl} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">01</span>
+            <span className="detail-icon-wrap"><DeliIcon name="location" /></span>
             <span><strong>Punta rito</strong><small>{BRAND_ASSETS.location}</small></span>
           </a>
           <div className="detail-link detail-link-static">
-            <span className="detail-index" aria-hidden="true">02</span>
+            <span className="detail-icon-wrap"><DeliIcon name="hours" /></span>
             <span><strong>Bukas kami</strong><small>{DELI_HOURS.weekday}<br />{DELI_HOURS.weekend}</small></span>
           </div>
           <a className="detail-link" href="tel:09952863665">
-            <span className="detail-index" aria-hidden="true">03</span>
+            <span className="detail-icon-wrap"><DeliIcon name="phone" /></span>
             <span><strong>May tanong?</strong><small>Tawag sa 0995 286 3665</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.instagram} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">04</span>
+            <span className="detail-icon-wrap"><DeliIcon name="instagram" /></span>
             <span><strong>Instagram namin</strong><small>@redegg.deli</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.facebook} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">05</span>
+            <span className="detail-icon-wrap"><DeliIcon name="facebook" /></span>
             <span><strong>Facebook namin</strong><small>Red Egg Deli</small></span>
           </a>
           <a className="detail-link" href={BRAND_ASSETS.officialPage} target="_blank" rel="noreferrer">
-            <span className="detail-index" aria-hidden="true">06</span>
+            <span className="detail-icon-wrap"><DeliIcon name="info" /></span>
             <span><strong>Alamin pa</strong><small>Red Egg Deli at Club Balai Isabel</small></span>
           </a>
         </div>
       </div>
       <a className="menu-card" href={BRAND_ASSETS.menu} target="_blank" rel="noreferrer" aria-label="Open the 2026 Red Egg Deli menu PDF">
-        <span className="menu-card-top"><span className="eyebrow">Menu 2026</span><span className="menu-card-open">Buksan ang PDF</span></span>
+        <span className="menu-card-top"><span className="menu-card-icon"><DeliIcon name="menu" /></span><span className="menu-card-open">Buksan ang PDF</span></span>
         <span className="menu-card-title">May masarap para sa’yo.</span>
         <span className="menu-card-copy">Rice meals, pasta, merienda, pancakes, kape, tsokolate, at juices.</span>
-        <span className="menu-card-action">Tingnan ang menu</span>
+        <span className="menu-card-action">Tingnan ang menu <DeliIcon name="arrow" /></span>
       </a>
     </section>
   );
@@ -369,7 +399,7 @@ function PublicApp() {
         )}
         <DeliDetails />
       </main>
-      <footer className="site-footer"><div className="content-width footer-inner"><div><Brand compact /><p>May tanong? Tawag sa {campaign?.supportContact || '0995 286 3665'}.</p></div><p className="footer-note">Itago ang acknowledgement mo at huwag i-post ang pangalan o mobile number publicly.</p></div></footer>
+      <footer className="site-footer"><div className="content-width footer-inner"><div><Brand compact /><p className="footer-contact"><DeliIcon name="phone" /><a href="tel:09952863665">May tanong? Tawag sa {campaign?.supportContact || '0995 286 3665'}.</a></p></div><p className="footer-note">Itago ang acknowledgement mo at huwag i-post ang pangalan o mobile number publicly.</p></div></footer>
     </div>
   );
 }

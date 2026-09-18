@@ -21,6 +21,13 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain('I-upload sa comment section ng official social media post ng Red Egg Deli');
     expect(app).toContain('Sun–Thu, 7AM to 5PM');
     expect(app).toContain('Fri & Sat, 7AM to 7PM');
+    expect(app).toContain('function DeliIcon');
+    expect(app).toContain('name="instagram"');
+    expect(app).toContain('name="facebook"');
+    expect(app).toContain('href="tel:09952863665"');
+    expect(css).toContain('.detail-icon-wrap');
+    expect(css).toContain('.menu-card-icon');
+    expect(css).toContain('.footer-contact');
     expect(staff).toContain('htmlFor="staff-printed-code"');
     expect(css).toContain(':focus-visible');
     expect(css).toContain('prefers-reduced-motion');
