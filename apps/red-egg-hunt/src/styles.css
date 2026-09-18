@@ -95,7 +95,7 @@ p { margin: 0; }
 .panel { min-width: 0; border: 1px solid var(--line); background: rgba(255, 255, 255, .9); box-shadow: var(--shadow); }
 .instructions, .form-panel, .acknowledgement-card, .staff-workspace, .staff-gate { padding: 30px; }
 .instructions { animation: rise-in .7s .35s ease both; }
-.form-panel { animation: rise-in .7s .43s ease both; }
+.form-panel { border-top: 5px solid var(--red); animation: rise-in .7s .43s ease both; }
 .panel h2 { margin-top: 8px; }
 .panel-lede, .instructions > p { margin-top: 14px; color: var(--muted); }
 .prize-note { margin: 16px 0 0; color: var(--ink); }
@@ -119,6 +119,7 @@ p { margin: 0; }
 .button-secondary { color: var(--red-dark); border-color: var(--red-dark); background: #fff; }
 .button-secondary:hover:not(:disabled) { color: #fff; background: var(--red-dark); transform: translateY(-2px); }
 .button-wide { width: 100%; margin-top: 24px; }
+.hero-cta { margin-top: 24px; }
 .notice { display: flex; flex-wrap: wrap; gap: 7px 12px; align-items: baseline; padding: 14px 16px; margin: 18px 0; border-left: 5px solid var(--yellow); background: var(--yellow-soft); }
 .notice-error { border-left-color: var(--error); background: #fff1f3; }
 .notice-success { border-left-color: var(--success); background: #edf8f1; }
@@ -217,20 +218,23 @@ p { margin: 0; }
   .header-tag { display: none; }
   .public-main { padding-top: 34px; }
   .hero { grid-template-columns: 1fr; gap: 16px; min-height: 0; padding-top: 4px; }
-  .hero-art { justify-self: end; width: min(100%, 260px); min-height: 190px; margin-top: -4px; }
-  .hero-logo { width: 132px; height: 132px; }
-  .hero-orbit-one { width: 190px; height: 130px; }
-  .hero-orbit-two { width: 142px; height: 194px; }
-  .hero-seal { top: 0; width: 88px; height: 88px; border-width: 2px; box-shadow: 4px 4px 0 var(--orange); }
-  .hero-seal span { font-size: 30px; }
-  .hero-seal small { font-size: 8px; }
-  .hero-art-note { bottom: 4px; right: 0; font-size: 9px; }
+  .hero-art { justify-self: end; width: min(100%, 220px); min-height: 152px; margin: -4px 0 -7px; }
+  .hero-logo { width: 106px; height: 106px; }
+  .hero-orbit-one { width: 162px; height: 112px; }
+  .hero-orbit-two { width: 122px; height: 164px; }
+  .hero-seal { top: 0; width: 76px; height: 76px; border-width: 2px; box-shadow: 4px 4px 0 var(--orange); }
+  .hero-seal span { font-size: 26px; }
+  .hero-seal small { font-size: 7px; }
+  .hero-art-note { bottom: 1px; right: 0; font-size: 8px; }
   .campaign-status { grid-template-columns: 1fr; }
   .server-time { text-align: left; }
   .counter-grid { grid-template-columns: 1fr; }
   .counter-grid div { padding: 15px 18px; }
   .counter-grid dd { font-size: 31px; }
-  .public-grid { grid-template-columns: 1fr; }
+  .public-grid { display: flex; flex-direction: column; }
+  .form-panel { order: -1; width: 100%; }
+  .acknowledgement { order: -1; width: 100%; }
+  #participant-form { scroll-margin-top: 90px; }
   .instructions, .form-panel, .acknowledgement-card, .staff-workspace, .staff-gate { padding: 23px 18px; }
   .deli-section { grid-template-columns: 1fr; }
   .deli-intro, .menu-card { padding: 24px 20px; }

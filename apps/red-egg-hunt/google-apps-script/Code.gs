@@ -72,8 +72,11 @@ function dispatch(action, campaignId, payload) {
   if (action === 'health') return { service: 'red-egg-hunt-google-sheets' };
   var settings = readSettings();
   assertCampaignId(settings, campaignId);
-  if (action === 'counters') return withScriptLock(function () { return publicCounters(settings); });
-  if (action === 'campaign') return withScriptLock(function () { return publicCampaign(settings); });
+  // Public reads do not mutate inventory. Avoid queueing them behind a slow
+  // submission or staff claim; a brief counter staleness is safer than making
+  // the participant page wait for the ten-second script-lock timeout.
+  if (action === 'counters') return publicCounters(settings);
+  if (action === 'campaign') return publicCampaign(settings);
   if (action === 'submit') return withScriptLock(function () { return submitCode(settings, payload); });
   if (action === 'staffLookup') return withScriptLock(function () { return staffLookup(settings, payload); });
   if (action === 'staffClaim') return withScriptLock(function () { return staffClaim(settings, payload); });

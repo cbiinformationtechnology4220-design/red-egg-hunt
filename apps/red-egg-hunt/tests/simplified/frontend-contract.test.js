@@ -8,9 +8,9 @@ describe('frontend accessibility and responsive contracts', () => {
       readFile('src/staffApp.jsx', 'utf8'),
       readFile('src/styles.css', 'utf8'),
     ]);
-    expect(app).toContain('label="Name"');
+    expect(app).toContain('label="Pangalan"');
     expect(app).toContain('label="Mobile number"');
-    expect(app).toContain('Eight-digit printed code');
+    expect(app).toContain('Walong-digit na printed code');
     expect(staff).toContain('htmlFor="staff-printed-code"');
     expect(css).toContain(':focus-visible');
     expect(css).toContain('prefers-reduced-motion');
