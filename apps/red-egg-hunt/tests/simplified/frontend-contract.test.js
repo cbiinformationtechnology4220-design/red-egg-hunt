@@ -28,6 +28,10 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(css).toContain('.detail-icon-wrap');
     expect(css).toContain('.menu-card-icon');
     expect(css).toContain('.footer-contact');
+    expect(css).toContain('@keyframes button-sheen');
+    expect(css).toContain('@keyframes number-pop');
+    expect(css).toContain('.form-panel form .field');
+    expect(css).toContain('@keyframes deli-ring-drift');
     expect(staff).toContain('htmlFor="staff-printed-code"');
     expect(css).toContain(':focus-visible');
     expect(css).toContain('prefers-reduced-motion');
