@@ -3,6 +3,15 @@ import { ClientApiError, requestApi } from './api.js';
 import StaffApp from './staffApp.jsx';
 import './styles.css';
 
+const BRAND_ASSETS = Object.freeze({
+  logo: '/brand/red-egg-deli-logo.png',
+  menu: '/brand/2026-red-egg-menu.pdf',
+  officialPage: 'https://www.balaiisabel.com/kaintayo/redeggdeli',
+  instagram: 'https://www.instagram.com/redegg.deli/',
+  location: 'Club Balai Isabel, Brgy. Banga, Talisay, Batangas 4220',
+  locationUrl: 'https://www.google.com/maps/search/?api=1&query=Red+Egg+Deli+Club+Balai+Isabel+Talisay+Batangas',
+});
+
 function route() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
   return pathname === '/staff' || pathname.startsWith('/staff/') ? 'staff' : 'public';
@@ -18,12 +27,8 @@ function makeRequestId() {
 function Brand({ compact = false }) {
   return (
     <a className={`brand${compact ? ' brand-compact' : ''}`} href="/" aria-label="Red Egg Hunt home">
-      <svg className="brand-mark" viewBox="0 0 64 72" aria-hidden="true" focusable="false">
-        <path d="M32 3C18 3 7 20 7 39c0 17 10 30 25 30s25-13 25-30C57 20 46 3 32 3Z" fill="currentColor" />
-        <path d="M22 19c-4 5-6 11-6 17" fill="none" stroke="#fffaf6" strokeLinecap="round" strokeWidth="5" />
-        <path d="M27 54c4 3 9 4 14 2" fill="none" stroke="#fffaf6" strokeLinecap="round" strokeWidth="4" />
-      </svg>
-      <span className="brand-copy"><span className="brand-kicker">Red Egg</span><span className="brand-title">Hunt</span></span>
+      <img className="brand-logo" src={BRAND_ASSETS.logo} alt="Red Egg Deli" />
+      <span className="brand-copy"><span className="brand-kicker">Red Egg Deli</span><span className="brand-title">Hunt</span></span>
     </a>
   );
 }
@@ -103,6 +108,42 @@ function Acknowledgement({ result, screenshotInstructions, onAnother }) {
   );
 }
 
+function DeliDetails() {
+  return (
+    <section className="deli-section" aria-labelledby="deli-title">
+      <div className="deli-intro">
+        <span className="eyebrow">The place behind the hunt</span>
+        <h2 id="deli-title">Stay for the good stuff.</h2>
+        <p>Red Egg Deli brings Batanguenyo merienda, all-day breakfast, and good coffee to Club Balai Isabel.</p>
+        <div className="deli-links">
+          <a className="detail-link" href={BRAND_ASSETS.locationUrl} target="_blank" rel="noreferrer">
+            <span className="detail-index" aria-hidden="true">01</span>
+            <span><strong>Find us</strong><small>{BRAND_ASSETS.location}</small></span>
+          </a>
+          <a className="detail-link" href="tel:09952863665">
+            <span className="detail-index" aria-hidden="true">02</span>
+            <span><strong>Need help?</strong><small>Call 0995 286 3665</small></span>
+          </a>
+          <a className="detail-link" href={BRAND_ASSETS.instagram} target="_blank" rel="noreferrer">
+            <span className="detail-index" aria-hidden="true">03</span>
+            <span><strong>Follow the deli</strong><small>@redegg.deli on Instagram</small></span>
+          </a>
+          <a className="detail-link" href={BRAND_ASSETS.officialPage} target="_blank" rel="noreferrer">
+            <span className="detail-index" aria-hidden="true">04</span>
+            <span><strong>Discover more</strong><small>Red Egg Deli at Club Balai Isabel</small></span>
+          </a>
+        </div>
+      </div>
+      <a className="menu-card" href={BRAND_ASSETS.menu} target="_blank" rel="noreferrer" aria-label="Open the 2026 Red Egg Deli menu PDF">
+        <span className="menu-card-top"><span className="eyebrow">2026 menu</span><span className="menu-card-open">Open PDF</span></span>
+        <span className="menu-card-title">See what’s cooking.</span>
+        <span className="menu-card-copy">Rice meals, pasta, merienda, pancakes, kape, tsokolate, and juices.</span>
+        <span className="menu-card-action">Browse the menu</span>
+      </a>
+    </section>
+  );
+}
+
 function PublicApp() {
   const [campaign, setCampaign] = useState(null);
   const [loadError, setLoadError] = useState(null);
@@ -128,7 +169,11 @@ function PublicApp() {
 
   const updateField = (name, value) => {
     setForm((current) => ({ ...current, [name]: name === 'printedCode' ? value.replace(/\D/g, '').slice(0, 8) : value }));
-    setErrors((current) => ({ ...current, [name]: undefined }));
+    setErrors((current) => {
+      const next = { ...current };
+      delete next[name];
+      return next;
+    });
     setNotice(null);
   };
 
@@ -168,12 +213,14 @@ function PublicApp() {
     requestIdRef.current = makeRequestId();
   };
 
+  const visibleErrors = Object.entries(errors).filter(([, message]) => Boolean(message));
+
   if (route() === 'staff') return <StaffApp />;
 
   return (
     <div className="app-shell">
       <header className="site-header">
-        <div className="content-width header-inner"><Brand /><span className="header-tag">A Red Egg Deli promotion</span></div>
+        <div className="content-width header-inner"><Brand /><span className="header-tag"><span>Almusal + Kape</span><span className="header-divider" aria-hidden="true">/</span><span>A Red Egg Deli promotion</span></span></div>
       </header>
       <main id="main-content" className="content-width public-main">
         <section className="hero" aria-labelledby="page-title">
@@ -183,7 +230,13 @@ function PublicApp() {
             <p className="hero-lede">Every card uses the same QR. Enter the eight-digit code printed beside it to record your entry.</p>
             <p className="hero-note">A QR scan only opens this page. Your card is consumed only after a successful submission.</p>
           </div>
-          <div className="hero-seal" aria-hidden="true"><span>50</span><small>cards</small></div>
+          <div className="hero-art" aria-hidden="true">
+            <span className="hero-orbit hero-orbit-one" />
+            <span className="hero-orbit hero-orbit-two" />
+            <img className="hero-logo" src={BRAND_ASSETS.logo} alt="" />
+            <div className="hero-seal"><span>50</span><small>winning cards</small></div>
+            <span className="hero-art-note">Almusal + Kape</span>
+          </div>
         </section>
 
         {loadError && <div className="notice notice-error" role="alert"><strong>Unable to load campaign status.</strong><span>{loadError}</span><button className="text-button" type="button" onClick={loadCampaign}>Retry</button></div>}
@@ -212,7 +265,7 @@ function PublicApp() {
               <h2 id="form-title">Record your card</h2>
               <p className="panel-lede">The code is the eight-digit number printed beside the QR. Do not add spaces.</p>
               <p className="prize-note"><strong>Prize:</strong> {campaign?.prizeDescription || 'PHP50 cash voucher'}</p>
-              {Object.keys(errors).length > 0 && <div className="error-summary" tabIndex="-1" ref={summaryRef} role="alert"><strong>Review these fields:</strong><ul>{Object.entries(errors).map(([key, message]) => <li key={key}><a href={`#field-${key}`}>{message}</a></li>)}</ul></div>}
+              {visibleErrors.length > 0 && <div className="error-summary" tabIndex="-1" ref={summaryRef} role="alert"><strong>Review these fields:</strong><ul>{visibleErrors.map(([key, message]) => <li key={key}><a href={`#field-${key}`}>{message}</a></li>)}</ul></div>}
               {notice && <div className={`notice notice-${notice.tone}`} role="alert">{notice.text}</div>}
               <form onSubmit={submit} noValidate>
                 <Field id="field-name" label="Name" hint="Use the name you want associated with this entry." error={errors.name}><input id="field-name" name="name" type="text" autoComplete="name" maxLength="120" aria-invalid={errors.name ? 'true' : 'false'} aria-describedby={`field-name-hint${errors.name ? ' field-name-error' : ''}`} value={form.name} onChange={(event) => updateField('name', event.target.value)} /></Field>
@@ -224,8 +277,9 @@ function PublicApp() {
             </section>
           )}
         </div>
+        <DeliDetails />
       </main>
-      <footer className="site-footer"><div className="content-width"><Brand compact /><p>Need help? Contact {campaign?.supportContact || 'campaign support'}.</p><p className="footer-note">Keep your acknowledgement private and do not post your name or mobile number publicly.</p></div></footer>
+      <footer className="site-footer"><div className="content-width footer-inner"><div><Brand compact /><p>Need help? Contact {campaign?.supportContact || '0995 286 3665'}.</p></div><p className="footer-note">Keep your acknowledgement private and do not post your name or mobile number publicly.</p></div></footer>
     </div>
   );
 }
