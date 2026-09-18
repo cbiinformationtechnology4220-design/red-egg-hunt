@@ -6,8 +6,6 @@ import './styles.css';
 const BRAND_ASSETS = Object.freeze({
   logo: '/brand/red-egg-deli-logo.png',
   menu: '/brand/2026-red-egg-menu.pdf',
-  walkingMascots: '/brand/red-egg-deli-walking-mascots.png',
-  skateMascot: '/brand/red-egg-deli-skate-mascot.png',
   officialPage: 'https://www.balaiisabel.com/kaintayo/redeggdeli',
   instagram: 'https://www.instagram.com/redegg.deli/',
   facebook: 'https://www.facebook.com/profile.php?id=61577582626176',
@@ -193,7 +191,6 @@ function DeliDetails() {
         <span className="eyebrow">Dito ang saya</span>
         <h2 id="deli-title">Kain tayo, kabayan!</h2>
         <p>Mas masaya ang hunt kapag may almusal, merienda, at kape. Visit Red Egg Deli sa Club Balai Isabel.</p>
-        <div className="deli-mascot deli-mascot-walking" aria-hidden="true"><img src={BRAND_ASSETS.walkingMascots} alt="" loading="lazy" decoding="async" /></div>
         <div className="deli-links">
           <a className="detail-link" href={BRAND_ASSETS.locationUrl} target="_blank" rel="noreferrer">
             <span className="detail-icon-wrap"><DeliIcon name="location" /></span>
@@ -222,7 +219,6 @@ function DeliDetails() {
         </div>
       </div>
       <a className="menu-card" href={BRAND_ASSETS.menu} target="_blank" rel="noreferrer" aria-label="Open the 2026 Red Egg Deli menu PDF">
-        <span className="menu-mascot" aria-hidden="true"><img src={BRAND_ASSETS.skateMascot} alt="" loading="lazy" decoding="async" /></span>
         <span className="menu-card-top"><span className="menu-card-icon"><DeliIcon name="menu" /></span><span className="menu-card-open">Buksan ang PDF</span></span>
         <span className="menu-card-title">May masarap para sa’yo.</span>
         <span className="menu-card-copy">Rice meals, pasta, merienda, pancakes, kape, tsokolate, at juices.</span>
