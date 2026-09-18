@@ -71,6 +71,7 @@ h2 { font-size: clamp(27px, 4vw, 42px); }
 h3 { font-size: 27px; }
 p { margin: 0; }
 .hero-lede { max-width: 650px; margin-top: 20px; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.35; }
+.hero-prize { max-width: 650px; margin-top: 16px; color: var(--red-dark); font-size: clamp(17px, 2.3vw, 21px); font-weight: 900; line-height: 1.35; }
 .hero-note { max-width: 600px; margin-top: 16px; color: var(--muted); }
 .hero-art { position: relative; display: grid; place-items: center; min-height: 270px; animation: rise-in .75s .1s ease both; }
 .hero-logo { position: relative; z-index: 2; width: 170px; height: 170px; object-fit: contain; filter: drop-shadow(8px 12px 0 rgba(141, 20, 85, .13)); animation: float-gently 5s .3s ease-in-out infinite; }

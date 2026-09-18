@@ -14,6 +14,11 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain("pathname === '/bokya'");
     expect(app).toContain('Bokya muna!');
     expect(app).toContain('Walang form at walang kailangang ilagay na pangalan o mobile number');
+    expect(app).toContain('Scan at Manalo!');
+    expect(app).toContain('I-type ang 8-digit code na makikita sa tabi nito para opisyal na makapasok ang entry mo!');
+    expect(app).toContain('hanggang ₱2,500 Cash Voucher');
+    expect(app).toContain('...CAMPAIGN_INTRO');
+    expect(app).toContain('I-upload sa comment section ng official social media post ng Red Egg Deli');
     expect(app).toContain('Sun–Thu, 7AM to 5PM');
     expect(app).toContain('Fri & Sat, 7AM to 7PM');
     expect(staff).toContain('htmlFor="staff-printed-code"');

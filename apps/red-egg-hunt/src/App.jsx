@@ -18,10 +18,15 @@ const DELI_HOURS = Object.freeze({
   weekend: 'Fri & Sat, 7AM to 7PM',
 });
 
+const CAMPAIGN_INTRO = Object.freeze({
+  heroKicker: 'Scan at Manalo!',
+  heroTitle: 'I-scan ang QR code.',
+  heroLede: 'I-type ang 8-digit code na makikita sa tabi nito para opisyal na makapasok ang entry mo!',
+  heroPrize: 'Ang Premyo: May tsansa kang manalo ng hanggang ₱2,500 Cash Voucher!',
+});
+
 const PUBLIC_COPY = Object.freeze({
-  heroKicker: 'Scan. I-type. Malaman agad.',
-  heroTitle: 'Hanapin ang Red Egg.',
-  heroLede: 'Pare-pareho ang QR sa bawat card. I-type ang walong-digit code na naka-print sa tabi nito para maitala ang entry mo.',
+  ...CAMPAIGN_INTRO,
   heroNote: 'QR scan lang ito, hindi pa ubos ang card. Magiging consumed lang pagkatapos ng matagumpay na submission.',
   instructionsTitle: 'Itago muna ang printed code bago mag-submit.',
   instructionsBody: 'Hanap ng Red Egg Hunt card, i-scan ang shared QR, at i-type ang walong-digit code na naka-print sa tabi nito.',
@@ -29,10 +34,8 @@ const PUBLIC_COPY = Object.freeze({
 });
 
 const BOKYA_COPY = Object.freeze({
-  heroKicker: 'False alarm muna.',
-  heroTitle: 'Bokya muna!',
-  heroLede: 'Hindi winning egg ang na-scan mo. Huwag susuko, kabayan—hanap pa ng ibang Red Egg.',
-  heroNote: 'Walang form at walang kailangang ilagay na pangalan o mobile number sa card na ito.',
+  ...CAMPAIGN_INTRO,
+  heroNote: 'Bokya muna ang egg na ito. Walang form at walang kailangang ilagay na pangalan o mobile number sa card na ito.',
 });
 
 function route() {
@@ -140,7 +143,7 @@ function BokyaPanel() {
   return (
     <section className="bokya-panel panel" aria-labelledby="bokya-title">
       <div className="bokya-wordmark" aria-hidden="true">BOKYA</div>
-      <span className="eyebrow">False alarm muna</span>
+      <span className="eyebrow">Bokya muna! False alarm muna.</span>
       <h2 id="bokya-title">Huwag susuko, kabayan.</h2>
       <p className="bokya-lede">Walang winning code sa egg na ito. Hanap pa ng ibang Red Egg para makasali.</p>
       <div className="bokya-next">
@@ -309,6 +312,7 @@ function PublicApp() {
             <span className="eyebrow">{pageCopy.heroKicker}</span>
             <h1 id="page-title">{pageCopy.heroTitle}</h1>
             <p className="hero-lede">{pageCopy.heroLede}</p>
+            <p className="hero-prize">{pageCopy.heroPrize}</p>
             <p className="hero-note">{pageCopy.heroNote}</p>
             {!bokyaMode && <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>}
           </div>
@@ -340,7 +344,7 @@ function PublicApp() {
                 <span className="eyebrow">Paano sumali</span>
                 <h2 id="instructions-title">{PUBLIC_COPY.instructionsTitle}</h2>
                 <p>{PUBLIC_COPY.instructionsBody}</p>
-                <ol className="steps"><li><span>1</span><div><strong>I-scan ang shared QR</strong><small>Dadalhin ka nito sa page na ito.</small></div></li><li><span>2</span><div><strong>Ilagay ang details mo</strong><small>Pangalan, mobile number, at printed code.</small></div></li><li><span>3</span><div><strong>I-screenshot ang resulta</strong><small>Itago ang acknowledgement para may reference ka.</small></div></li></ol>
+                <ol className="steps"><li><span>1</span><div><strong>I-scan ang shared QR</strong><small>Dadalhin ka nito sa page na ito.</small></div></li><li><span>2</span><div><strong>Ilagay ang details mo</strong><small>Pangalan, mobile number, at printed code.</small></div></li><li><span>3</span><div><strong>I-screenshot ang resulta</strong><small>Itago ang acknowledgement para may reference ka.</small></div></li><li><span>4</span><div><strong>I-upload ang naging resulta</strong><small>I-upload sa comment section ng official social media post ng Red Egg Deli ang naging resulta ng iyong submission.</small></div></li></ol>
               </section>
 
               {result ? <Acknowledgement result={result} screenshotInstructions={PUBLIC_COPY.screenshotInstructions} onAnother={resetForm} /> : (
