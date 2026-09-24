@@ -368,7 +368,7 @@ function PublicApp() {
             {pageCopy.heroLede && <p className="hero-lede">{pageCopy.heroLede}</p>}
             <p className="hero-prize">{pageCopy.heroPrize}</p>
             {pageCopy.heroNote && <p className="hero-note">{pageCopy.heroNote}</p>}
-            <VoucherClaimNote />
+            {!bokyaMode && <VoucherClaimNote />}
             {!bokyaMode && <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>}
           </div>
           <div className="hero-art" aria-hidden="true">

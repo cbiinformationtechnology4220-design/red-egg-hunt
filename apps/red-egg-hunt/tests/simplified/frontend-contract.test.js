@@ -19,6 +19,7 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain('Chance manalo ng hanggang ₱3,000 cash voucher!');
     expect(app).toContain('Magsisimula ang pag-claim ng voucher sa October 4');
     expect(app).toContain('voucher-claim-note');
+    expect(app).toContain('{!bokyaMode && <VoucherClaimNote />}');
     expect(app).toContain('...CAMPAIGN_INTRO');
     expect(app).toContain('I-upload sa comment section ng official social media post ng Red Egg Deli');
     expect(app).toContain('Sun–Thu, 7AM to 5PM');
