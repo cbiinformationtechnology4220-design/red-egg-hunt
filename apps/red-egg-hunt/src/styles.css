@@ -73,6 +73,13 @@ p { margin: 0; }
 .hero-lede { max-width: 650px; margin-top: 20px; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.35; }
 .hero-prize { max-width: 650px; margin-top: 16px; color: var(--red-dark); font-size: clamp(17px, 2.3vw, 21px); font-weight: 900; line-height: 1.35; }
 .hero-note { max-width: 600px; margin-top: 16px; color: var(--muted); }
+.voucher-claim-note { display: flex; align-items: center; gap: 12px; max-width: 650px; margin-top: 20px; padding: 13px 15px; border: 2px solid var(--pink-soft); border-left: 6px solid var(--yellow); border-radius: 14px; color: var(--ink); background: rgba(255, 255, 255, .84); box-shadow: 4px 4px 0 rgba(244, 164, 0, .14); animation: rise-in .65s .25s ease both; }
+.voucher-claim-icon { display: grid; place-items: center; width: 34px; height: 34px; flex: none; border: 2px solid var(--red-dark); border-radius: 10px; color: var(--red-dark); background: var(--yellow-soft); animation: icon-breathe 4s .8s ease-in-out infinite; }
+.voucher-claim-icon .detail-icon { width: 18px; height: 18px; }
+.voucher-claim-icon-clock { border-color: var(--orange); color: var(--orange); background: var(--pink-pale); animation-delay: 1.2s; }
+.voucher-claim-copy { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.voucher-claim-copy strong { color: var(--red-dark); font-size: 14px; }
+.voucher-claim-copy span { color: var(--muted); font-size: 12px; line-height: 1.4; }
 .hero-art { position: relative; display: grid; place-items: center; min-height: 270px; animation: rise-in .75s .1s ease both; }
 .hero-logo { position: relative; z-index: 2; width: 170px; height: 170px; object-fit: contain; filter: drop-shadow(8px 12px 0 rgba(141, 20, 85, .13)); animation: float-gently 5s .3s ease-in-out infinite; }
 .hero-orbit { position: absolute; border: 2px solid rgba(230, 0, 136, .22); border-radius: 49% 51% 45% 55%; transform: rotate(26deg); }

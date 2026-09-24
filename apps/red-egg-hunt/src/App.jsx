@@ -186,6 +186,19 @@ function DeliIcon({ name }) {
   }
 }
 
+function VoucherClaimNote() {
+  return (
+    <div className="voucher-claim-note" role="note">
+      <span className="voucher-claim-icon" aria-hidden="true"><DeliIcon name="loyalty" /></span>
+      <span className="voucher-claim-copy">
+        <strong>Voucher claim</strong>
+        <span>Magsisimula ang pag-claim ng voucher sa October 4, sa oras ng bukas ng Red Egg Deli: Sun–Thu, 7AM–5PM; Fri &amp; Sat, 7AM–7PM.</span>
+      </span>
+      <span className="voucher-claim-icon voucher-claim-icon-clock" aria-hidden="true"><DeliIcon name="hours" /></span>
+    </div>
+  );
+}
+
 function DeliDetails() {
   return (
     <section className="deli-section" aria-labelledby="deli-title">
@@ -355,6 +368,7 @@ function PublicApp() {
             {pageCopy.heroLede && <p className="hero-lede">{pageCopy.heroLede}</p>}
             <p className="hero-prize">{pageCopy.heroPrize}</p>
             {pageCopy.heroNote && <p className="hero-note">{pageCopy.heroNote}</p>}
+            <VoucherClaimNote />
             {!bokyaMode && <a className="button button-primary hero-cta" href="#participant-form">I-submit ang entry</a>}
           </div>
           <div className="hero-art" aria-hidden="true">
