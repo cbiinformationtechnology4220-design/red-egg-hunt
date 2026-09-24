@@ -15,7 +15,7 @@ npm install
 cp .env.example .env.local
 ```
 
-Local defaults use `DATABASE_PROVIDER=mock` and a synthetic all-winning 50-code inventory. This fixture must never be printed or used as production inventory.
+Local defaults use `DATABASE_PROVIDER=mock` and a synthetic all-winning 60-code inventory. This fixture must never be printed or used as production inventory.
 
 ## Commands
 

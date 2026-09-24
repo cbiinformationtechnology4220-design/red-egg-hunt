@@ -32,7 +32,7 @@ describe('Google Sheets durable adapter', () => {
           outcome: 'winning',
           submittedAt: '2026-09-24T10:01:00.000Z',
           retry: false,
-          counters: { total: 50, submitted: 1, remaining: 49, claimed: 0 },
+          counters: { total: 60, submitted: 1, remaining: 59, claimed: 0 },
         },
       }),
     });

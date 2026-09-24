@@ -5,7 +5,7 @@ describe('environment contract', () => {
   it('uses loopback local defaults and rejects path-bearing origins', () => {
     const config = loadConfig({ APP_ENV: 'local', PUBLIC_SITE_URL: 'http://localhost:4173' });
     expect(config.publicSiteUrl).toBe('http://localhost:4173');
-    expect(config.campaign.totalCodes).toBe(50);
+    expect(config.campaign.totalCodes).toBe(60);
     expect(config.campaign.prizeDescription).toBe('PHP50 cash voucher');
     expect(config.campaign.supportContact).toBe('09952863665');
     expect(() => parseOrigin('https://red-egg-hunt.vercel.app/printed-code', 'production')).toThrow();

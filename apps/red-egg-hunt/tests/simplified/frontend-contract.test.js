@@ -16,7 +16,7 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain('Walang form at walang kailangang ilagay na pangalan o mobile number');
     expect(app).toContain('SCAN AT MANALO!');
     expect(app).toContain('Scan ang QR!');
-    expect(app).toContain('Chance manalo ng hanggang ₱2,500 cash voucher!');
+    expect(app).toContain('Chance manalo ng hanggang ₱3,000 cash voucher!');
     expect(app).toContain('...CAMPAIGN_INTRO');
     expect(app).toContain('I-upload sa comment section ng official social media post ng Red Egg Deli');
     expect(app).toContain('Sun–Thu, 7AM to 5PM');

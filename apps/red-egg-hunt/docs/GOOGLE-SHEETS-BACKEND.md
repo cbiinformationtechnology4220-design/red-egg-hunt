@@ -44,7 +44,7 @@ prize_description           PHP50 cash voucher
 timezone                    Asia/Manila
 starts_at                   2026-09-24T18:00:00+08:00
 ends_at                     2026-10-03T18:00:00+08:00
-total_codes                 50
+total_codes                 60
 instructions                Find a Red Egg Hunt card, scan the shared QR, and enter the eight-digit code printed beside it.
 screenshot_instructions     Screenshot this acknowledgement for your records. Do not post your mobile number or other private information publicly.
 privacy_notice              Use the approved campaign privacy notice here.
@@ -62,7 +62,7 @@ The first row must contain these headers:
 printed_code, outcome, state, participant_name, mobile_number, submission_request_hash, submission_payload_hash, submitted_at, claimed_at, claimed_by
 ```
 
-Load exactly 50 approved unique eight-digit codes. For every row:
+Load exactly 60 approved unique eight-digit codes. For every row:
 
 ```text
 outcome = winning

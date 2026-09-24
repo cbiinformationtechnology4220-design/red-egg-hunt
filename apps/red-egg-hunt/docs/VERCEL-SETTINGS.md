@@ -34,7 +34,7 @@ CAMPAIGN_PRIZE=PHP50 cash voucher
 CAMPAIGN_TIMEZONE=Asia/Manila
 CAMPAIGN_START_AT=2026-09-24T18:00:00+08:00
 CAMPAIGN_END_AT=2026-10-03T18:00:00+08:00
-CAMPAIGN_TOTAL_CODES=50
+CAMPAIGN_TOTAL_CODES=60
 SUPPORT_CONTACT=09952863665
 ```
 
@@ -55,7 +55,7 @@ Before producing QR materials, verify:
 1. The Vercel project owns and resolves the canonical URL over HTTPS.
 2. The Google Sheet is private and owned by an approved resort account.
 3. Apps Script deployment runs as the approved owner and uses the shared secret.
-4. The `Codes` tab contains exactly 50 unique eight-digit winning codes.
+4. The `Codes` tab contains exactly 60 unique eight-digit winning codes.
 5. Public submissions, duplicate retries, counters, and staff claims work against the deployed Preview.
 6. The staff identity/session integration is approved and tested.
 7. Backup, retention, privacy, legal, support, and training evidence is recorded.

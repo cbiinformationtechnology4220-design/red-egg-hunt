@@ -6,7 +6,7 @@ import { hashRequestId, hashSubmissionPayload } from './validation.js';
 const VALID_OUTCOMES = new Set(['winning']);
 const AVAILABLE = 'available';
 
-export function createLocalInventory(totalCodes = 50) {
+export function createLocalInventory(totalCodes = 60) {
   return Array.from({ length: totalCodes }, (_, index) => ({
     printedCode: String(70000001 + index),
     outcome: 'winning',

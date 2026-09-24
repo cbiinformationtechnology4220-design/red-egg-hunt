@@ -9,7 +9,7 @@ The server-side `PUBLIC_SITE_URL` is authoritative. `VITE_PUBLIC_SITE_URL` is br
 | Local | Loopback HTTP or HTTPS | In-memory fixture | Synthetic all-winning codes |
 | Preview | Dedicated HTTPS preview origin | Nonproduction Apps Script and private Google Sheet | Test inventory |
 | Staging | Approved HTTPS rehearsal origin | Dedicated staging Apps Script and private Google Sheet | Rehearsal inventory |
-| Production | `https://red-egg-hunt.vercel.app` | Production Apps Script and private Google Sheet | Exactly 50 approved winning codes |
+| Production | `https://red-egg-hunt.vercel.app` | Production Apps Script and private Google Sheet | Exactly 60 approved winning codes |
 
 ## Browser-visible values
 
@@ -34,7 +34,7 @@ The browser never receives the Apps Script shared secret, Google Sheet ID, parti
 
 - Campaign start and end are ISO-8601 instants; the end is later than the start.
 - Campaign timezone is `Asia/Manila`.
-- Total inventory is exactly 50.
+- Total inventory is exactly 60.
 - Every durable printed code is exactly eight digits and has the `winning` outcome.
 - Unknown codes are invalid; there are no production bokya rows.
 - Name and mobile are stored only in the private Google Sheet and never returned through counters, acknowledgement, staff status, URLs, logs, or browser storage.

@@ -14,7 +14,7 @@ describe('simplified public printed-code flow', () => {
     const stack = createTestStack();
     const winning = await stack.runtime.campaign.submit(publicSubmission('80000001'), { ip: '198.51.100.3' });
     expect(winning.outcome).toBe('winning');
-    expect(winning.counters).toEqual({ total: 50, submitted: 1, remaining: 49, claimed: 0 });
+    expect(winning.counters).toEqual({ total: 60, submitted: 1, remaining: 59, claimed: 0 });
     expect(stack.repository.getRecord('80000001')).toEqual(expect.objectContaining({ state: 'submitted-winning' }));
   });
 
@@ -22,7 +22,7 @@ describe('simplified public printed-code flow', () => {
     const stack = createTestStack();
     await expect(stack.runtime.campaign.submit(publicSubmission('8000000'), { ip: '198.51.100.5' })).rejects.toMatchObject({ code: 'VALIDATION_ERROR' });
     await expect(stack.runtime.campaign.submit(publicSubmission('99999999'), { ip: '198.51.100.5' })).rejects.toMatchObject({ code: 'INVALID_CODE' });
-    await expect(stack.runtime.campaign.getPublicCampaign()).resolves.toEqual(expect.objectContaining({ counters: { submitted: 0, remaining: 50, claimed: 0 } }));
+    await expect(stack.runtime.campaign.getPublicCampaign()).resolves.toEqual(expect.objectContaining({ counters: { submitted: 0, remaining: 60, claimed: 0 } }));
   });
 
   it('allows five different codes for one participant and reports 45 remaining', async () => {
@@ -33,7 +33,7 @@ describe('simplified public printed-code flow', () => {
     }
     expect(results).toHaveLength(5);
     expect(results.every((result) => result.outcome === 'winning')).toBe(true);
-    expect(results.at(-1).counters).toEqual({ total: 50, submitted: 5, remaining: 45, claimed: 0 });
+    expect(results.at(-1).counters).toEqual({ total: 60, submitted: 5, remaining: 55, claimed: 0 });
   });
 
   it('returns a safe already-submitted state for another request and a safe idempotent retry for the same request', async () => {
@@ -58,7 +58,7 @@ describe('simplified public printed-code flow', () => {
     }), { ip: `198.51.100.${index + 10}` })));
     expect(attempts.filter((result) => result.outcome === 'winning')).toHaveLength(1);
     expect(attempts.filter((result) => result.outcome === 'already-submitted')).toHaveLength(19);
-    expect((await stack.runtime.campaign.getPublicCampaign()).counters).toEqual({ submitted: 1, remaining: 49, claimed: 0 });
+    expect((await stack.runtime.campaign.getPublicCampaign()).counters).toEqual({ submitted: 1, remaining: 59, claimed: 0 });
   });
 
   it('uses server time only and cannot be opened by a client clock field', async () => {

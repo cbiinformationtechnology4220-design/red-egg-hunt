@@ -16,7 +16,7 @@ export function testConfig(overrides = {}) {
       timezone: 'Asia/Manila',
       startAt,
       endAt,
-      totalCodes: 50,
+      totalCodes: 60,
       instructions: 'Test instructions',
       screenshotInstructions: 'Test screenshot instructions',
       privacyNotice: 'Test privacy notice',
@@ -32,7 +32,7 @@ export function testConfig(overrides = {}) {
 }
 
 export function inventory() {
-  return Array.from({ length: 50 }, (_, index) => ({
+  return Array.from({ length: 60 }, (_, index) => ({
     printedCode: String(80000001 + index),
     outcome: 'winning',
   }));

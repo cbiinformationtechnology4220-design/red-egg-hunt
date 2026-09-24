@@ -21,7 +21,7 @@ const DELI_HOURS = Object.freeze({
 const CAMPAIGN_INTRO = Object.freeze({
   heroKicker: 'SCAN AT MANALO!',
   heroTitle: 'Scan ang QR!',
-  heroPrize: 'Chance manalo ng hanggang ₱2,500 cash voucher!',
+  heroPrize: 'Chance manalo ng hanggang ₱3,000 cash voucher!',
 });
 
 const PUBLIC_COPY = Object.freeze({
@@ -361,7 +361,7 @@ function PublicApp() {
             <span className="hero-orbit hero-orbit-one" />
             <span className="hero-orbit hero-orbit-two" />
             <img className="hero-logo" src={BRAND_ASSETS.logo} alt="" />
-            <div className="hero-seal"><span>50</span><small>winning cards</small></div>
+            <div className="hero-seal"><span>60</span><small>winning cards</small></div>
             <span className="hero-art-note">Almusal + Kape</span>
           </div>
         </section>

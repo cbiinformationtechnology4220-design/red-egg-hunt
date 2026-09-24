@@ -1,7 +1,7 @@
 import { AppError } from './errors.js';
 
 export const CANONICAL_PRODUCTION_URL = 'https://red-egg-hunt.vercel.app';
-export const CAMPAIGN_TOTAL_CODES = 50;
+export const CAMPAIGN_TOTAL_CODES = 60;
 const ENVIRONMENTS = new Set(['local', 'preview', 'staging', 'production']);
 
 function optional(value, fallback = undefined) {

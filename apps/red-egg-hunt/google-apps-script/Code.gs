@@ -33,7 +33,7 @@ var CODE_HEADERS = [
   'claimed_by',
 ];
 var AUDIT_HEADERS = ['occurred_at', 'action', 'outcome', 'code_hash', 'staff_subject'];
-var TOTAL_CODES = 50;
+var TOTAL_CODES = 60;
 
 function doGet() {
   return jsonResponse({ ok: true, data: { service: 'red-egg-hunt-google-sheets' } });
@@ -65,7 +65,7 @@ function initializeWorkbook() {
   codesSheet.getRange('A:A').setNumberFormat('@');
   ensureSheet(spreadsheet, SHEET_NAMES.AUDIT, AUDIT_HEADERS);
   spreadsheet.setSpreadsheetTimeZone('Asia/Manila');
-  return 'Workbook initialized. Add approved settings and exactly 50 winning codes before deployment.';
+  return 'Workbook initialized. Add approved settings and exactly 60 winning codes before deployment.';
 }
 
 function dispatch(action, campaignId, payload) {
