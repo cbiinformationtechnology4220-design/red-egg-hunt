@@ -17,11 +17,17 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(app).toContain('SCAN AT MANALO!');
     expect(app).toContain('Scan ang QR!');
     expect(app).toContain('Chance manalo ng hanggang ₱3,000 cash voucher!');
-    expect(app).toContain('Magsisimula ang pag-claim ng voucher sa October 4');
+    expect(app).toContain('Mag-claim at gamitin ang voucher mula October 4 hanggang 11');
     expect(app).toContain('voucher-claim-note');
     const acknowledgementBlock = app.slice(app.indexOf('function Acknowledgement'), app.indexOf('function BokyaPanel'));
     expect(acknowledgementBlock).toContain('<VoucherClaimNote />');
+    expect(acknowledgementBlock).toContain('<VoucherClaimMechanics />');
     expect(app).not.toContain('{!bokyaMode && <VoucherClaimNote />}');
+    expect(app).toContain('Mechanics for voucher claiming');
+    expect(app).toContain('Vouchers with posts lang ang puwedeng i-claim.');
+    expect(app).toContain('Gamitin ang voucher mula October 4 hanggang 11');
+    expect(app).toContain('href={BRAND_ASSETS.facebook}');
+    expect(app).toContain('href={BRAND_ASSETS.instagram}');
     expect(app).toContain('...CAMPAIGN_INTRO');
     expect(app).toContain('I-upload sa comment section ng official social media post ng Red Egg Deli');
     expect(app).toContain('Sun–Thu, 7AM to 5PM');
@@ -42,6 +48,8 @@ describe('frontend accessibility and responsive contracts', () => {
     expect(css).toContain('.delivery-callout');
     expect(css).toContain('.loyalty-card');
     expect(css).toContain('.voucher-claim-note');
+    expect(css).toContain('.voucher-claim-mechanics');
+    expect(css).toContain('.voucher-claim-steps');
     expect(css).toContain('.privacy-notice');
     expect(css).toContain('@keyframes button-sheen');
     expect(css).toContain('@keyframes number-pop');

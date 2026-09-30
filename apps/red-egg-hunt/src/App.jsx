@@ -128,6 +128,7 @@ function Acknowledgement({ result, screenshotInstructions, onAnother }) {
         </div>
         <p className="result-line"><span className="result-dot result-dot-winning" aria-hidden="true" />Winning card ito</p>
         <VoucherClaimNote />
+        <VoucherClaimMechanics />
         <div className="screenshot-note">
           <strong>Sunod na gawin</strong>
           <p>{screenshotInstructions}</p>
@@ -193,10 +194,31 @@ function VoucherClaimNote() {
       <span className="voucher-claim-icon" aria-hidden="true"><DeliIcon name="loyalty" /></span>
       <span className="voucher-claim-copy">
         <strong>Voucher claim</strong>
-        <span>Magsisimula ang pag-claim ng voucher sa October 4, sa oras ng bukas ng Red Egg Deli: Sun–Thu, 7AM–5PM; Fri &amp; Sat, 7AM–7PM.</span>
+        <span>Mag-claim at gamitin ang voucher mula October 4 hanggang 11, sa oras ng bukas ng Red Egg Deli: Sun–Thu, 7AM–5PM; Fri &amp; Sat, 7AM–7PM.</span>
       </span>
       <span className="voucher-claim-icon voucher-claim-icon-clock" aria-hidden="true"><DeliIcon name="hours" /></span>
     </div>
+  );
+}
+
+function VoucherClaimMechanics() {
+  return (
+    <section className="voucher-claim-mechanics" aria-labelledby="voucher-claim-mechanics-title">
+      <div className="voucher-claim-heading">
+        <span className="voucher-claim-icon" aria-hidden="true"><DeliIcon name="loyalty" /></span>
+        <div>
+          <span className="eyebrow">Mechanics for voucher claiming</span>
+          <h3 id="voucher-claim-mechanics-title">Para ma-claim ang voucher mo</h3>
+        </div>
+      </div>
+      <ol className="voucher-claim-steps">
+        <li><span aria-hidden="true">1</span><div><strong>Scan at mag-submit.</strong><p>I-scan ang QR code. Ilagay ang 8-digit code para malaman kung ang itlog ay swerte o hindi.</p></div></li>
+        <li><span aria-hidden="true">2</span><div><strong>I-fill out ang contact details.</strong><p>Ilagay ang pangalan at mobile number mo sa form.</p></div></li>
+        <li><span aria-hidden="true">3</span><div><strong>Mag-post sa social media.</strong><p>Mag-post sa <a href={BRAND_ASSETS.facebook} target="_blank" rel="noreferrer">Facebook</a> o <a href={BRAND_ASSETS.instagram} target="_blank" rel="noreferrer">Instagram</a> kung saan o paano mo ito nakita. Vouchers with posts lang ang puwedeng i-claim. 'Wag kalimutang i-tag ang Red Egg Deli sa post.</p></div></li>
+        <li><span aria-hidden="true">4</span><div><strong>I-screenshot ang post.</strong><p>Itago ang screenshot for reference sa pag-claim. Huwag isama sa public post ang mobile number mo.</p></div></li>
+        <li><span aria-hidden="true">5</span><div><strong>Gamitin ang voucher mula October 4 hanggang 11.</strong><p>Sa Red Egg Deli, habang bukas ang store.</p></div></li>
+      </ol>
+    </section>
   );
 }
 
